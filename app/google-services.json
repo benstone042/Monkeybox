@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "809036891286",
-    "project_id": "firebase-monkeybox"
+    "project_number": "311195526799",
+    "project_id": "monkeybox-161422"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:809036891286:android:d6d74af381c6cb56",
+        "mobilesdk_app_id": "1:311195526799:android:d6d74af381c6cb56",
         "android_client_info": {
           "package_name": "com.sujityadav.monkeybox"
         }
       },
       "oauth_client": [
         {
-          "client_id": "809036891286-pt1cbucqh17g816ori3h6t6hp6nbkrjf.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "809036891286-v5bm7m1vo10c88eqsmp1ite10f2q01sn.apps.googleusercontent.com",
+          "client_id": "311195526799-h5rhcnkdp59u1glv8739350l9vnep3gn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sujityadav.monkeybox",
             "certificate_hash": "24bda184f624a497693b8990f71a8d5c67a0a1be"
           }
+        },
+        {
+          "client_id": "311195526799-3ugmn7plt7v7bmt7q6q7tm504fk35tgi.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBk76VeW2rlKeUM3K9bIJeo2DMpOqb9I6s"
+          "current_key": "AIzaSyBYEgyto0HWmqyuTuayPQsOWRHBFtmfZ3U"
         }
       ],
       "services": {

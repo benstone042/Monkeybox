@@ -1,21 +1,19 @@
 package com.sujityadav.monkeybox;
 
-import android.*;
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,7 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import java.util.ArrayList;
 
 public class LocationActivity extends AppCompatActivity implements  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -43,6 +40,7 @@ public class LocationActivity extends AppCompatActivity implements  GoogleApiCli
     private RecyclerView recyclerView;
     private Location mLastLocation;
     private RequestQueue queue;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +108,7 @@ public class LocationActivity extends AppCompatActivity implements  GoogleApiCli
     }
 
     public void getNearbyPlace(){
+        showProgressDialog();
      String getnearbyplace = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&radius=500&types=restaurant" +
                 "|department_store" +
                 "|cafe" +
@@ -135,6 +134,7 @@ public class LocationActivity extends AppCompatActivity implements  GoogleApiCli
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                hideProgressDialog();
                 try {
                 ArrayList<Place>placelist = new ArrayList<>();
                     JSONArray jsonArray= response.getJSONArray("results");
@@ -160,6 +160,7 @@ public class LocationActivity extends AppCompatActivity implements  GoogleApiCli
 
 
                 } catch (JSONException e) {
+                    hideProgressDialog();
                     e.printStackTrace();
                     Toast.makeText(LocationActivity.this,"error occured in volley GetNearbyPlace",Toast.LENGTH_LONG).show();
                 }
@@ -169,6 +170,7 @@ public class LocationActivity extends AppCompatActivity implements  GoogleApiCli
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                hideProgressDialog();
 
             }
         });
@@ -240,6 +242,20 @@ public class LocationActivity extends AppCompatActivity implements  GoogleApiCli
             }
 
 
+        }
+    }
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage("Fetching Nearby Location..");
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
         }
     }
 }
